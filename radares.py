@@ -25,6 +25,8 @@ while True:
 		break;
 
 	elif opcion == 1:
+		print("Provincias con información de radares:")
+		print()
 		for provincia in provincias(arbol):
 			print(provincia)
 
