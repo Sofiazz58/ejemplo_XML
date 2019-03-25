@@ -1,4 +1,5 @@
 from lxml import etree
+arbol = etree.parse('radares.xml')
 
 while True:
 	print()
