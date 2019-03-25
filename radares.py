@@ -9,6 +9,9 @@ def contar_radares(arbol):
 	numero=arbol.xpath('count(//RADAR)')
 	return numero
 
+#def provincia_carreteras(arbol,provincia):
+
+
 while True:
 	print()
 	print("1.Mostrar el nombre de las provincias de las que tenemos información sobre radares.")
@@ -37,6 +40,8 @@ while True:
 	elif opcion == 2:
 		print("Tenemos",int(contar_radares(arbol)),"radares de los que mostrar información.")
 		
+	elif opcion == 3:
+		provincia=input("Dime una provincia: ")
 
 # Opción de error de opción		    
 	else:
