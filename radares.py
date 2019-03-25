@@ -41,7 +41,8 @@ while True:
 		print("Tenemos",int(contar_radares(arbol)),"radares de los que mostrar información.")
 		
 	elif opcion == 3:
-		provincia=input("Dime una provincia: ")
+		provincia=input("Dime una provincia: ").title()
+		print(provincia)
 
 # Opción de error de opción		    
 	else:
