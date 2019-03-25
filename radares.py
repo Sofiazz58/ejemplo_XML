@@ -42,9 +42,12 @@ while True:
 		print("Tenemos",int(contar_radares(arbol)),"radares de los que mostrar información.")
 		
 	elif opcion == 3:
+		lista=[]
 		provincia=input("Dime una provincia: ").title()
 		for nombre in provincia_carreteras(arbol,provincia):
-			print(nombre)
+			if nombre not in lista:
+				lista.append(nombre)
+		print(lista)
 
 # Opción de error de opción		    
 	else:
