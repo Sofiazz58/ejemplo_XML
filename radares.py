@@ -1,6 +1,10 @@
 from lxml import etree
 arbol = etree.parse('radares.xml')
 
+def provincias(arbol):
+	provincia=arbol.xpath("//NOMBRE/text()")
+	return provincia
+
 while True:
 	print()
 	print("1.Mostrar el nombre de las provincias de las que tenemos información sobre radares.")
@@ -21,7 +25,8 @@ while True:
 		break;
 
 	elif opcion == 1:
-		print("OK")
+		for provincia in provincias(arbol):
+			print(provincia)
 
 # Opción de error de opción		    
 	else:
