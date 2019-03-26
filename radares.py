@@ -47,7 +47,10 @@ while True:
 		for nombre in provincia_carreteras(arbol,provincia):
 			if nombre not in lista:
 				lista.append(nombre)
-		print(lista)
+		if len(lista) == 0:
+			print("No existe la provincia.")
+		else:
+			print(lista)
 
 # Opción de error de opción		    
 	else:
