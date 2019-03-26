@@ -47,10 +47,12 @@ while True:
 		for nombre in provincia_carreteras(arbol,provincia):
 			if nombre not in lista:
 				lista.append(nombre)
-		if len(lista) == 0:
-			print("No existe la provincia.")
-		else:
-			print(lista)
+		for i in lista:
+			numero=arbol.xpath('count(//CARRETERA[DENOMINACION="%s"]/RADAR)'%i)
+			if numero == 1:
+				print("La carretera",i,"tiene",int(numero),"radar")
+			else:
+				print("La carretera",i,"tiene",int(numero),"radares")
 
 # Opción de error de opción		    
 	else:
