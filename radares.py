@@ -13,6 +13,10 @@ def provincia_carreteras(arbol,provincia):
 	carretera=arbol.xpath('//PROVINCIA[NOMBRE="%s"]/CARRETERA/DENOMINACION/text()'%provincia)
 	return carretera
 
+def prov_pasa(arbol,carretera):
+	provincia=arbol.xpath('//CARRETERA[DENOMINACION="%s"]'%carretera)
+	return provincia
+
 while True:
 	print()
 	print("1.Mostrar el nombre de las provincias de las que tenemos información sobre radares.")
@@ -56,6 +60,12 @@ while True:
 					print("La carretera",i,"tiene",int(numero),"radar")
 				else:
 					print("La carretera",i,"tiene",int(numero),"radares")
+
+	elif opcion == 4:
+		carretera=input("Dime una carretera: ").upper()
+		for provincia in prov_pasa(arbol,carretera):
+			print(provincia)
+
 
 # Opción de error de opción		    
 	else:
