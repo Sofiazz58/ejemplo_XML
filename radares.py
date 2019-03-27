@@ -15,6 +15,8 @@ def provincia_carreteras(arbol,provincia):
 
 def prov_pasa(arbol,carretera):
 	provincias = arbol.xpath('//CARRETERA[DENOMINACION="%s"]/../NOMBRE/text()'%carretera)
+	punto_ini = arbol.xpath('//CARRETERA[DENOMINACION="%s"]/RADAR/PUNTO_INICIAL/PK/text()'%carretera)
+	punto_fin = arbol.xpath('//CARRETERA[DENOMINACION="%s"]/RADAR/PUNTO_FINAL/PK/text()'%carretera)
 	return provincias
 
 while True:
@@ -63,9 +65,10 @@ while True:
 
 	elif opcion == 4:
 		carretera=input("Dime una carretera: ").upper()
+		print()
+		print("La carretera %s pasa por:" % carretera)
 		for provincia in prov_pasa(arbol,carretera):
 			print(provincia)
-
 
 # Opción de error de opción		    
 	else:
