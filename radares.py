@@ -14,8 +14,8 @@ def provincia_carreteras(arbol,provincia):
 	return carretera
 
 def prov_pasa(arbol,carretera):
-	provincia=arbol.xpath('//CARRETERA[DENOMINACION="%s"]'%carretera)
-	return provincia
+	provincias = arbol.xpath('//CARRETERA[DENOMINACION="%s"]/../NOMBRE/text()'%carretera)
+	return provincias
 
 while True:
 	print()
