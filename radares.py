@@ -95,11 +95,11 @@ while True:
 		print()
 		print("La carretera",carretera,"tiene",int(contar_radares_por_carretera(arbol,carretera)[0]),"radares")
 
-		for latidud,longitud in zip(contar_radares_por_carretera(arbol,carretera)[1],contar_radares_por_carretera(arbol,carretera)[2]):
-			cont=1
+		cont=1
+		for latitud,longitud in zip(contar_radares_por_carretera(arbol,carretera)[1],contar_radares_por_carretera(arbol,carretera)[2]):
 			print("Radar número %i:" % cont)
 			print("http://www.openstreetmap.org/#map=20/%s/%s" % (latitud,longitud))
-
+			cont=cont+1
 # Opción de error de opción		    
 	else:
 		print()
