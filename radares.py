@@ -71,11 +71,7 @@ while True:
 		print()
 		print("La carretera %s pasa por:" % carretera)
 		for provincia in prov_pasa(arbol,carretera):
-			if len(provincia)=="0":
-				print("NIO")
-			else:
-				print("si")
-				print(provincia)
+			print(provincia)
 
 		print()
 		print("Sus radares son: ")
