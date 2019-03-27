@@ -15,9 +15,12 @@ def provincia_carreteras(arbol,provincia):
 
 def prov_pasa(arbol,carretera):
 	provincias = arbol.xpath('//CARRETERA[DENOMINACION="%s"]/../NOMBRE/text()'%carretera)
+	return provincias
+
+def radares(arbol,carretera):
 	punto_ini = arbol.xpath('//CARRETERA[DENOMINACION="%s"]/RADAR/PUNTO_INICIAL/PK/text()'%carretera)
 	punto_fin = arbol.xpath('//CARRETERA[DENOMINACION="%s"]/RADAR/PUNTO_FINAL/PK/text()'%carretera)
-	return provincias
+	return zip(punto_ini,punto_fin)
 
 while True:
 	print()
@@ -68,7 +71,21 @@ while True:
 		print()
 		print("La carretera %s pasa por:" % carretera)
 		for provincia in prov_pasa(arbol,carretera):
-			print(provincia)
+			if len(provincia)=="0":
+				print("NIO")
+			else:
+				print("si")
+				print(provincia)
+
+		print()
+		print("Sus radares son: ")
+		cont=1
+		for punto_ini,punto_fin in radares(arbol,carretera):
+			print("Radar número %i: " %cont)
+			print("Punto inicial: %s" % punto_ini)
+			print("Punto final: %s" % punto_fin)
+			print()
+			cont=cont+1
 
 # Opción de error de opción		    
 	else:
