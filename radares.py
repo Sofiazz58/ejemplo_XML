@@ -22,6 +22,12 @@ def radares(arbol,carretera):
 	punto_fin = arbol.xpath('//CARRETERA[DENOMINACION="%s"]/RADAR/PUNTO_FINAL/PK/text()'%carretera)
 	return zip(punto_ini,punto_fin)
 
+def contar_radares_por_carretera(arbol,carretera):
+	numero=arbol.xpath('count(//CARRETERA[DENOMINACION="%s"]/RADAR)'%carretera)
+	latitud=arbol.xpath('//CARRETERA[DENOMINACION="%s"]/RADAR/PUNTO_INICIAL/LATITUD/text()'%carretera)
+	longitud=arbol.xpath('//CARRETERA[DENOMINACION="%s"]/RADAR/PUNTO_INICIAL/LONGITUD/text()'%carretera)
+	return zip(numero,latitud,longitud)
+
 while True:
 	print()
 	print("1.Mostrar el nombre de las provincias de las que tenemos información sobre radares.")
@@ -82,6 +88,10 @@ while True:
 			print("Punto final: %s" % punto_fin)
 			print()
 			cont=cont+1
+
+	elif opcion == 5:
+		carretera=input("Dime una carretera: ").upper()
+		print()
 
 # Opción de error de opción		    
 	else:
