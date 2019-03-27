@@ -26,7 +26,8 @@ def contar_radares_por_carretera(arbol,carretera):
 	numero=arbol.xpath('count(//CARRETERA[DENOMINACION="%s"]/RADAR)'%carretera)
 	latitud=arbol.xpath('//CARRETERA[DENOMINACION="%s"]/RADAR/PUNTO_INICIAL/LATITUD/text()'%carretera)
 	longitud=arbol.xpath('//CARRETERA[DENOMINACION="%s"]/RADAR/PUNTO_INICIAL/LONGITUD/text()'%carretera)
-	return zip(numero,latitud,longitud)
+	info=[numero,latitud,longitud]
+	return info
 
 while True:
 	print()
@@ -92,6 +93,12 @@ while True:
 	elif opcion == 5:
 		carretera=input("Dime una carretera: ").upper()
 		print()
+		print("La carretera",carretera,"tiene",int(contar_radares_por_carretera(arbol,carretera)[0]),"radares")
+
+		for latidud,longitud in zip(contar_radares_por_carretera(arbol,carretera)[1],contar_radares_por_carretera(arbol,carretera)[2]):
+			cont=1
+			print("Radar número %i:" % cont)
+			print("http://www.openstreetmap.org/#map=20/%s/%s" % (latitud,longitud))
 
 # Opción de error de opción		    
 	else:
