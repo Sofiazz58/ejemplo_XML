@@ -29,6 +29,13 @@ def contar_radares_por_carretera(arbol,carretera):
 	info=[numero,latitud,longitud]
 	return info
 
+def comprobar_carretera(arbol,carretera):
+	carreteras=arbol.xpath('//CARRETERA/DENOMINACION/text()')
+	if carretera in carreteras:
+		return True
+	else:
+		return False
+
 while True:
 	print()
 	print("1.Mostrar el nombre de las provincias de las que tenemos información sobre radares.")
