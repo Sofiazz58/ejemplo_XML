@@ -83,30 +83,38 @@ while True:
 	elif opcion == 4:
 		carretera=input("Dime una carretera: ").upper()
 		print()
-		print("La carretera %s pasa por:" % carretera)
-		for provincia in prov_pasa(arbol,carretera):
-			print(provincia)
+		comprobacion=comprobar_carretera(arbol,carretera)
+		if comprobacion == True:
+			print("La carretera %s pasa por:" % carretera)
+			for provincia in prov_pasa(arbol,carretera):
+				print(provincia)
 
-		print()
-		print("Sus radares son: ")
-		cont=1
-		for punto_ini,punto_fin in radares(arbol,carretera):
-			print("Radar número %i: " %cont)
-			print("Punto inicial: %s" % punto_ini)
-			print("Punto final: %s" % punto_fin)
 			print()
-			cont=cont+1
+			print("Sus radares son: ")
+			cont=1
+			for punto_ini,punto_fin in radares(arbol,carretera):
+				print("Radar número %i: " %cont)
+				print("Punto inicial: %s" % punto_ini)
+				print("Punto final: %s" % punto_fin)
+				print()
+				cont=cont+1
+		else:
+			print("No existe la carretera")
 
 	elif opcion == 5:
 		carretera=input("Dime una carretera: ").upper()
 		print()
-		print("La carretera",carretera,"tiene",int(contar_radares_por_carretera(arbol,carretera)[0]),"radares")
+		comprobacion=comprobar_carretera(arbol,carretera)
+		if comprobacion == True:
+			print("La carretera",carretera,"tiene",int(contar_radares_por_carretera(arbol,carretera)[0]),"radares")
 
-		cont=1
-		for latitud,longitud in zip(contar_radares_por_carretera(arbol,carretera)[1],contar_radares_por_carretera(arbol,carretera)[2]):
-			print("Radar número %i:" % cont)
-			print("http://www.openstreetmap.org/#map=20/%s/%s" % (latitud,longitud))
-			cont=cont+1
+			cont=1
+			for latitud,longitud in zip(contar_radares_por_carretera(arbol,carretera)[1],contar_radares_por_carretera(arbol,carretera)[2]):
+				print("Radar número %i:" % cont)
+				print("http://www.openstreetmap.org/#map=20/%s/%s" % (latitud,longitud))
+				cont=cont+1
+		else:
+			print("No existe la carretera")
 # Opción de error de opción		    
 	else:
 		print()
