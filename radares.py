@@ -29,94 +29,43 @@ def contar_radares_por_carretera(arbol,carretera):
 	info=[numero,latitud,longitud]
 	return info
 
-def comprobar_carretera(arbol,carretera):
-	carreteras=arbol.xpath('//CARRETERA/DENOMINACION/text()')
-	if carretera in carreteras:
-		return True
-	else:
-		return False
 
-while True:
-	print()
-	print("1.Mostrar el nombre de las provincias de las que tenemos información sobre radares.")
-	print("2.Mostrar la cantidad de radares de los que tenemos información.")
-	print("3.Pedir por teclado una provincia y mostrar el nombre de las carreteras que tiene y la cantidad de radares.")
-	print("4.Pedir por teclado una carretera, muestra las provincias por la que pasa y sus respectivos radares.")
-	print("5.Pedir por teclado una carretera, cuenta los radares que tiene y muestra las coordenadas de los radares.(Se puede obtener la URL de OpenStraeetMap para ver donde está el radar).")
-	print("0.Salir")
-	print()
-	opcion=int(input("Elige opción: "))
-	print()
+from xml.dom import minidom 
+docXML = minidom.parse("radares.xml")
 
-# Opción para despedir el programa
-	if opcion == 0:
-		print()
-		print("Adiós!")
-		print()
-		break;
+def lista_provincias(arbol):
+    	nombres = arbol.xpath('//nombre/text()')	
+	return nombres
 
-	elif opcion == 1:
-		print("Provincias con información de radares:")
-		print()
-		for provincia in provincias(arbol):
-			print(provincia)
+def lista_radares(arbol):
+    	cantidad = arbol.xpath('//cantidad/text()')
+	return cantidad
 
-	elif opcion == 2:
-		print("Tenemos",int(contar_radares(arbol)),"radares de los que mostrar información.")
-		
-	elif opcion == 3:
-		lista=[]
-		provincia=input("Dime una provincia: ").title()
-		for nombre in provincia_carreteras(arbol,provincia):
-			if nombre not in lista:
-				lista.append(nombre)
-		if len(lista) == 0:
-			print("No existe la provincia.")
-		else:
-			for i in lista:
-				numero=arbol.xpath('count(//CARRETERA[DENOMINACION="%s"]/RADAR)'%i)
-				if numero == 1:
-					print("La carretera",i,"tiene",int(numero),"radar")
-				else:
-					print("La carretera",i,"tiene",int(numero),"radares")
+def lista_provincia_total_radares(arbol):
+    	lista=[]
+	nombres = arbol.xpath('//nombre/text()')
+	for provincia in arbol.xpath('//provincia'):
+		radares=radares.xpath('count(./radares/radares)')	
+		lista.append(int(radares))
+	return zip(nombres,lista)
 
-	elif opcion == 4:
-		carretera=input("Dime una carretera: ").upper()
-		print()
-		comprobacion=comprobar_carretera(arbol,carretera)
-		if comprobacion == True:
-			print("La carretera %s pasa por:" % carretera)
-			for provincia in prov_pasa(arbol,carretera):
-				print(provincia)
 
-			print()
-			print("Sus radares son: ")
-			cont=1
-			for punto_ini,punto_fin in radares(arbol,carretera):
-				print("Radar número %i: " %cont)
-				print("Punto inicial: %s" % punto_ini)
-				print("Punto final: %s" % punto_fin)
-				print()
-				cont=cont+1
-		else:
-			print("No existe la carretera")
+def carretera(prov,arbol):
+    	nombres = arbol.xpath('/lista/carretera[nombre="%s"]//provincia/text()'%prov)
+	return nombres
 
-	elif opcion == 5:
-		carretera=input("Dime una carretera: ").upper()
-		print()
-		comprobacion=comprobar_carretera(arbol,carretera)
-		if comprobacion == True:
-			print("La carretera",carretera,"tiene",int(contar_radares_por_carretera(arbol,carretera)[0]),"radares")
+#LISTAMENU
 
-			cont=1
-			for latitud,longitud in zip(contar_radares_por_carretera(arbol,carretera)[1],contar_radares_por_carretera(arbol,carretera)[2]):
-				print("Radar número %i:" % cont)
-				print("http://www.openstreetmap.org/#map=20/%s/%s" % (latitud,longitud))
-				cont=cont+1
-		else:
-			print("No existe la carretera")
-# Opción de error de opción		    
-	else:
-		print()
-		print("Error de opción")
-		print()
+for nombre in lista_provincias('arbol'):
+	print (nombre)
+ 
+for nombre in lista_radares('arbol'):
+    print (nombre)
+    
+for nombre ,total in 'lista_provincias_total_radares'('arbol'):
+    	print (nombre,total)
+     
+for nombre in carretera ("N-320")('arbol'):
+    	print (nombre)
+    
+
